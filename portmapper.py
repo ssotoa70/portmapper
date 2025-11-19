@@ -34,7 +34,7 @@ from datetime import datetime
 from typing import Optional, Tuple, List, Union
 
 # SSL warnings suppression removed; not applicable
-SCRIPT_VERSION = '5.0'
+SCRIPT_VERSION = '6.0'
 
 # A curated list of plausible excuses for when things go wrong.
 # Sourced from the collective genius and despair of developers everywhere.
@@ -1954,9 +1954,10 @@ class PortMapperPyQt(QMainWindow):
 
     def __init__(self, legacy_mode=False):
         super().__init__()
-        self.setWindowTitle(f'Port-Mapper  v{SCRIPT_VERSION}')
-        self.setGeometry(100, 100, 1200, 794)
+        self.setWindowTitle(f'PortMapper v{SCRIPT_VERSION} - Network Design Studio')
+        self.setGeometry(100, 100, 1400, 900)
         self.statusBar()
+        self._apply_vast_theme()
 
         self.legacy_mode = legacy_mode
         self.switch_id = '3'  # Default to Mellanox SN5400 400G
@@ -2048,6 +2049,186 @@ class PortMapperPyQt(QMainWindow):
         self._init_validators()
         self._build_ui()
         self._load_default_switch_image()
+
+    def _apply_vast_theme(self):
+        """Apply VAST Data VMS-inspired theme with professional blue tones."""
+        # VAST Data color palette (deep blue, sky blue, accent colors)
+        vast_stylesheet = """
+            QMainWindow {
+                background-color: #0f1419;
+            }
+            QWidget {
+                background-color: #0f1419;
+                color: #ffffff;
+            }
+            QTabWidget {
+                background-color: #0f1419;
+                color: #ffffff;
+            }
+            QTabBar::tab {
+                background-color: #1a2332;
+                color: #b0b8c8;
+                padding: 8px 20px;
+                margin: 2px;
+                border: none;
+                border-radius: 4px;
+                font-weight: 500;
+            }
+            QTabBar::tab:selected {
+                background-color: #2563eb;
+                color: #ffffff;
+                border-bottom: 3px solid #1d4ed8;
+            }
+            QTabBar::tab:hover {
+                background-color: #1d4ed8;
+                color: #ffffff;
+            }
+            QLineEdit {
+                background-color: #1a2332;
+                color: #ffffff;
+                border: 1px solid #2563eb;
+                border-radius: 4px;
+                padding: 6px;
+                selection-background-color: #2563eb;
+            }
+            QLineEdit:focus {
+                border: 2px solid #3b82f6;
+                background-color: #162038;
+            }
+            QLineEdit:disabled {
+                background-color: #0d1117;
+                color: #4a5568;
+                border: 1px solid #1a2332;
+            }
+            QComboBox {
+                background-color: #1a2332;
+                color: #ffffff;
+                border: 1px solid #2563eb;
+                border-radius: 4px;
+                padding: 6px;
+                selection-background-color: #2563eb;
+            }
+            QComboBox::drop-down {
+                border: none;
+            }
+            QComboBox::down-arrow {
+                image: none;
+                color: #2563eb;
+            }
+            QComboBox QAbstractItemView {
+                background-color: #1a2332;
+                color: #ffffff;
+                selection-background-color: #2563eb;
+                border: 1px solid #2563eb;
+            }
+            QPushButton {
+                background-color: #2563eb;
+                color: #ffffff;
+                border: none;
+                border-radius: 4px;
+                padding: 8px 16px;
+                font-weight: 600;
+                font-size: 11pt;
+            }
+            QPushButton:hover {
+                background-color: #3b82f6;
+            }
+            QPushButton:pressed {
+                background-color: #1d4ed8;
+            }
+            QPushButton:disabled {
+                background-color: #0d1117;
+                color: #4a5568;
+            }
+            QCheckBox {
+                color: #ffffff;
+                spacing: 5px;
+            }
+            QCheckBox::indicator {
+                width: 18px;
+                height: 18px;
+            }
+            QCheckBox::indicator:unchecked {
+                background-color: #1a2332;
+                border: 1px solid #2563eb;
+                border-radius: 3px;
+            }
+            QCheckBox::indicator:checked {
+                background-color: #2563eb;
+                border: 1px solid #2563eb;
+                border-radius: 3px;
+                image: url(:/icons/check.png);
+            }
+            QRadioButton {
+                color: #ffffff;
+                spacing: 5px;
+            }
+            QRadioButton::indicator {
+                width: 18px;
+                height: 18px;
+            }
+            QRadioButton::indicator:unchecked {
+                background-color: #1a2332;
+                border: 1px solid #2563eb;
+                border-radius: 9px;
+            }
+            QRadioButton::indicator:checked {
+                background-color: #2563eb;
+                border: 1px solid #2563eb;
+                border-radius: 9px;
+            }
+            QLabel {
+                color: #ffffff;
+                background-color: transparent;
+            }
+            QGroupBox {
+                color: #ffffff;
+                border: 1px solid #2563eb;
+                border-radius: 6px;
+                margin-top: 8px;
+                padding-top: 8px;
+                font-weight: 600;
+            }
+            QGroupBox::title {
+                subcontrol-origin: margin;
+                left: 10px;
+                padding: 0 5px;
+            }
+            QScrollBar:vertical {
+                background-color: #0f1419;
+                width: 12px;
+            }
+            QScrollBar::handle:vertical {
+                background-color: #2563eb;
+                border-radius: 6px;
+                min-height: 20px;
+            }
+            QScrollBar::handle:vertical:hover {
+                background-color: #3b82f6;
+            }
+            QScrollArea {
+                background-color: #0f1419;
+                border: none;
+            }
+            QSpinBox, QDoubleSpinBox {
+                background-color: #1a2332;
+                color: #ffffff;
+                border: 1px solid #2563eb;
+                border-radius: 4px;
+                padding: 6px;
+            }
+            QTextEdit {
+                background-color: #1a2332;
+                color: #ffffff;
+                border: 1px solid #2563eb;
+                border-radius: 4px;
+                padding: 6px;
+            }
+            QFrame {
+                background-color: #0f1419;
+            }
+        """
+        self.setStyleSheet(vast_stylesheet)
 
     def _init_validators(self):
         """Initialize QValidators for reuse."""
@@ -2235,11 +2416,13 @@ class PortMapperPyQt(QMainWindow):
             return
         
         msg_box = QMessageBox(self)
-        msg_box.setWindowTitle('Welcome to Port-Mapper v' + SCRIPT_VERSION)
+        msg_box.setWindowTitle(f'Welcome to PortMapper v{SCRIPT_VERSION} - Network Design Studio')
         msg_box.setIcon(QMessageBox.Icon.Information)
-        
+
         welcome_text = """
-<h2>Quick Start Guide</h2>
+<h2>PortMapper v6.0 - Network Design Studio</h2>
+<p><i>Professional network topology design for storage systems</i></p>
+<h3>Quick Start Guide</h3>
 <p><b>Follow these steps to configure your switch:</b></p>
 
 <p><b>1️⃣ Select a switch model and click "Assign Switch"</b><br>

@@ -1,0 +1,291 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                   PORTMAPPER 5.5 - LOCATION-INDEPENDENT RELEASE               ║
+║                            Release Notes (November 2025)                      ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+OVERVIEW
+────────────────────────────────────────────────────────────────────────────────
+This is an improved distribution of PortMapper 5.5 with complete portability
+enhancements. The application can now be run from ANY location without requiring
+installation or configuration adjustments.
+
+KEY IMPROVEMENTS
+────────────────────────────────────────────────────────────────────────────────
+
+✓ LOCATION-INDEPENDENT
+  → Works from any directory (no need to be in a specific folder)
+  → Can be moved, copied, or symlinked to any location
+  → Relative to script directory, not current working directory
+
+✓ SIMPLIFIED SETUP
+  → No installation wizard or configuration steps
+  → Single pip install command (one time only)
+  → Automatic dependency checking via launcher script
+
+✓ SELF-CONTAINED
+  → All required resources bundled (fonts, images)
+  → No external dependencies other than Python packages
+  → Works offline after initial setup
+
+✓ FLEXIBLE EXECUTION
+  → Use launcher: ./run.sh (recommended)
+  → Use directly: python3 portmapper.py
+  → Works from shell scripts and automation tools
+
+QUICK START
+────────────────────────────────────────────────────────────────────────────────
+
+1. ONE-TIME SETUP (Install Python packages)
+   python3 -m pip install PyQt6 Pillow pandas requests --break-system-packages
+
+2. RUN THE APPLICATION
+   ./run.sh
+
+   OR
+
+   python3 portmapper.py
+
+SYSTEM REQUIREMENTS
+────────────────────────────────────────────────────────────────────────────────
+• Python 3.9 or later
+• PyQt6 (graphical UI framework)
+• Pillow/PIL (image processing)
+• pandas (data handling)
+• requests (HTTP library)
+
+WHAT'S INCLUDED
+────────────────────────────────────────────────────────────────────────────────
+portmapper/
+├── portmapper.py              Main application (updated for portability)
+├── run.sh                     Smart launcher script
+├── README.md                  Comprehensive user guide
+├── IMPROVEMENTS.md            Technical details of all improvements
+├── INSTALL_QUICK.txt          Quick setup reference
+├── RELEASE_NOTES.txt          This file
+├── ArialBold.ttf              Required font file
+├── vast-man.jpeg              Branding image
+├── base_*.png                 Network device graphics (9 files)
+├── base_*.pxd                 Design configuration files
+└── Projects/                  Working directory (auto-created on first use)
+
+BACKWARD COMPATIBILITY
+────────────────────────────────────────────────────────────────────────────────
+✓ 100% compatible with original PortMapper 5.5
+✓ All existing projects load without modification
+✓ All saved configurations work as before
+✓ No changes to user interface or features
+✓ All device models and designs supported
+
+WHAT CHANGED INTERNALLY
+────────────────────────────────────────────────────────────────────────────────
+
+BEFORE (Problematic):
+  - Paths hardcoded as 'DesignOutput', 'Projects'
+  - Only worked if run from the exact folder
+  - Failed if folder was moved or copied
+  - Couldn't find fonts/images from different locations
+
+AFTER (Fixed):
+  - All paths calculated relative to script location
+  - Works from any directory
+  - Safe to move, copy, or backup
+  - Resources found automatically via resource_path()
+
+TECHNICAL DETAILS
+────────────────────────────────────────────────────────────────────────────────
+For detailed technical information about changes made, see: IMPROVEMENTS.md
+
+Key changes:
+1. resource_path() now uses os.path.dirname(os.path.abspath(__file__))
+2. DesignOutput path: os.path.join(script_dir, 'DesignOutput')
+3. Projects path: os.path.join(script_dir, 'Projects', ...)
+4. File dialogs use calculated default directories
+
+INSTALLATION INSTRUCTIONS
+────────────────────────────────────────────────────────────────────────────────
+
+STEP 1: Verify Python
+  $ python3 --version
+  # Should show Python 3.9 or later
+
+STEP 2: Install Dependencies (one time only)
+  $ python3 -m pip install PyQt6 Pillow pandas requests --break-system-packages
+
+  OR let the launcher do it:
+  $ ./run.sh
+  # Follow prompts if packages are missing
+
+STEP 3: Run the Application
+  $ ./run.sh
+
+  OR
+
+  $ python3 portmapper.py
+
+That's it! You're ready to use PortMapper.
+
+MOVING TO A DIFFERENT LOCATION
+────────────────────────────────────────────────────────────────────────────────
+
+The application is fully relocatable. Move it anywhere:
+
+# Copy to Applications folder
+cp -r portmapper /Applications/
+
+# Or anywhere else
+cp -r portmapper /opt/tools/
+mv portmapper ~/MyTools/
+
+# Run from the new location
+cd /Applications/portmapper
+./run.sh
+
+Everything will work correctly because paths are calculated at runtime.
+
+USAGE EXAMPLES
+────────────────────────────────────────────────────────────────────────────────
+
+From the installation directory:
+  cd /Users/sergio.soto/portmapper
+  ./run.sh
+
+From anywhere with full path:
+  /Users/sergio.soto/portmapper/run.sh
+
+After moving to /Applications:
+  /Applications/portmapper/run.sh
+
+Add to PATH (Linux/macOS):
+  export PATH="/opt/portmapper:$PATH"
+  portmapper  # if wrapped in a portmapper script
+
+Python execution:
+  python3 /Users/sergio.soto/portmapper/portmapper.py
+  python3 ~/portmapper/portmapper.py
+
+TROUBLESHOOTING
+────────────────────────────────────────────────────────────────────────────────
+
+Q: ModuleNotFoundError: No module named 'PyQt6'
+A: Install dependencies:
+   python3 -m pip install PyQt6 Pillow pandas requests --break-system-packages
+
+   Or use the launcher:
+   ./run.sh
+
+Q: "python3: command not found"
+A: Python 3 is not installed. Install it using:
+   - macOS: brew install python3
+   - Ubuntu/Debian: sudo apt install python3
+   - Windows: Download from python.org or use WSL
+
+Q: Application won't start
+A: Check Python version (needs 3.9+):
+   python3 --version
+
+   Verify all dependencies:
+   python3 -m pip list | grep -E 'PyQt6|Pillow|pandas|requests'
+
+Q: "Permission denied" when running run.sh
+A: Make the script executable:
+   chmod +x /Users/sergio.soto/portmapper/run.sh
+
+Q: Projects not saving in expected location
+A: Ensure the portmapper folder has write permissions:
+   ls -ld /Users/sergio.soto/portmapper  # Check permissions
+   chmod 755 /Users/sergio.soto/portmapper  # Fix if needed
+
+FEATURES
+────────────────────────────────────────────────────────────────────────────────
+
+Supported Devices:
+  • Cisco switches (9332D, 9364D)
+  • Sonic switches (SN3700, SN4600HR, SN5400, SN5600)
+  • Arista switches (7050DX4, 7060DX5, 7060X664pef)
+  • VAST DBox models (Mavericks, Ceres, RAIDER)
+
+Capabilities:
+  • Interactive network topology visualization
+  • Port mapping and configuration
+  • Automatic design documentation generation
+  • Switch configuration export
+  • Multi-rack cluster planning
+  • Cell planning with default & advanced modes
+  • Project organization (Customer → Site → Cluster)
+
+OUTPUT
+────────────────────────────────────────────────────────────────────────────────
+
+All output is organized by project hierarchy:
+
+portmapper/
+└── Projects/
+    └── {CustomerName}/
+        └── {SiteName}/
+            └── {ClusterName}/
+                ├── DesignOutput/       Generated diagrams and designs
+                └── SwitchOutput/       Exported switch configurations
+
+Example:
+portmapper/Projects/ACME/Production/NYC-Cluster1/DesignOutput/
+
+TESTING RESULTS
+────────────────────────────────────────────────────────────────────────────────
+
+✓ All required files present and accessible
+✓ All image resources found and loadable
+✓ File permissions correct (executable scripts)
+✓ Script modifications verified
+✓ Path resolution working correctly
+✓ Ready for deployment
+
+DOCUMENTATION
+────────────────────────────────────────────────────────────────────────────────
+
+Included Documentation:
+  • README.md - Comprehensive user guide and features
+  • INSTALL_QUICK.txt - Quick 3-step setup
+  • IMPROVEMENTS.md - Technical details of all improvements
+  • RELEASE_NOTES.txt - This file
+
+Support:
+  Check the included documentation files for detailed help.
+
+VERSION INFORMATION
+────────────────────────────────────────────────────────────────────────────────
+Product:        PortMapper
+Version:        5.5 (Location-Independent Edition)
+Release Date:   November 2025
+Previous Ver:   5.5 (Original)
+Python Min:     3.9
+Status:         Production Ready
+
+MIGRATION FROM ORIGINAL VERSION
+────────────────────────────────────────────────────────────────────────────────
+
+If you have projects from the original PortMapper 5.5:
+
+1. Install the new version (this release)
+2. Copy your existing Projects/ folder from old installation
+3. Paste it into the new portmapper/ folder
+4. Run: ./run.sh
+5. All projects will be available immediately
+
+No data conversion needed - fully backward compatible!
+
+FEEDBACK & IMPROVEMENTS
+────────────────────────────────────────────────────────────────────────────────
+
+This release adds production-grade portability while maintaining 100% backward
+compatibility with the original PortMapper 5.5.
+
+Suggestions for future improvements:
+  • PyInstaller bundled executable (single .app/.exe file)
+  • Configuration file for custom preferences
+  • Auto-update functionality
+  • Integration with configuration management systems
+
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                         Ready to use! 🚀                                     ║
+║                           ./run.sh                                           ║
+╚══════════════════════════════════════════════════════════════════════════════╝

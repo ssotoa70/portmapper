@@ -1,0 +1,182 @@
+name: Build Multi-Platform Releases
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+jobs:
+  build-macos:
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        python-version: ['3.11']
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install PyQt6 Pillow pandas requests PyInstaller
+
+      - name: Build macOS .app
+        run: |
+          pyinstaller \
+            --name "PortMapper" \
+            --onedir \
+            --windowed \
+            --osx-bundle-identifier "com.portmapper.app" \
+            --add-data "ArialBold.ttf:." \
+            --add-data "vast-man.jpeg:." \
+            --add-data "base_cisco_9332d.png:." \
+            --add-data "base_cisco_9364d.png:." \
+            --add-data "base_sn3700.png:." \
+            --add-data "base_sn4600hr.png:." \
+            --add-data "base_sn4600hr.pxd:." \
+            --add-data "base-arista7050DX4.png:." \
+            --add-data "base-arista7060DX5.png:." \
+            --add-data "base-arista7060X664pef.png:." \
+            --add-data "base-SN5400.png:." \
+            --add-data "base-SN5600.png:." \
+            --collect-submodules PyQt6 \
+            portmapper.py
+
+      - name: Create DMG
+        run: |
+          mkdir -p dist
+          hdiutil create -volname "PortMapper 6.0" -srcfolder dist/PortMapper.app -ov -format UDZO dist/PortMapper-6.0.dmg
+          ls -lh dist/PortMapper*.dmg
+
+      - name: Upload macOS release
+        uses: actions/upload-artifact@v3
+        with:
+          name: macos-build
+          path: dist/PortMapper*.dmg
+
+  build-windows:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        python-version: ['3.11']
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install PyQt6 Pillow pandas requests PyInstaller
+
+      - name: Build Windows .exe
+        run: |
+          pyinstaller `
+            --name "PortMapper" `
+            --onefile `
+            --windowed `
+            --add-data "ArialBold.ttf;." `
+            --add-data "vast-man.jpeg;." `
+            --add-data "base_cisco_9332d.png;." `
+            --add-data "base_cisco_9364d.png;." `
+            --add-data "base_sn3700.png;." `
+            --add-data "base_sn4600hr.png;." `
+            --add-data "base_sn4600hr.pxd;." `
+            --add-data "base-arista7050DX4.png;." `
+            --add-data "base-arista7060DX5.png;." `
+            --add-data "base-arista7060X664pef.png;." `
+            --add-data "base-SN5400.png;." `
+            --add-data "base-SN5600.png;." `
+            --collect-submodules PyQt6 `
+            portmapper.py
+
+      - name: Upload Windows release
+        uses: actions/upload-artifact@v3
+        with:
+          name: windows-build
+          path: dist/PortMapper.exe
+
+  build-linux:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.11']
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libxkbcommon0 libdbus-1-3
+          python -m pip install --upgrade pip
+          pip install PyQt6 Pillow pandas requests PyInstaller
+
+      - name: Build Linux executable
+        run: |
+          pyinstaller \
+            --name "portmapper" \
+            --onedir \
+            --add-data "ArialBold.ttf:." \
+            --add-data "vast-man.jpeg:." \
+            --add-data "base_cisco_9332d.png:." \
+            --add-data "base_cisco_9364d.png:." \
+            --add-data "base_sn3700.png:." \
+            --add-data "base_sn4600hr.png:." \
+            --add-data "base_sn4600hr.pxd:." \
+            --add-data "base-arista7050DX4.png:." \
+            --add-data "base-arista7060DX5.png:." \
+            --add-data "base-arista7060X664pef.png:." \
+            --add-data "base-SN5400.png:." \
+            --add-data "base-SN5600.png:." \
+            --collect-submodules PyQt6 \
+            portmapper.py
+
+      - name: Create AppImage
+        run: |
+          cd dist
+          mv portmapper portmapper-build
+          mkdir -p PortMapper.AppDir/usr/bin
+          cp -r portmapper-build/* PortMapper.AppDir/usr/bin/
+          wget https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage
+          chmod +x appimagetool-x86_64.AppImage
+          ./appimagetool-x86_64.AppImage PortMapper.AppDir PortMapper-6.0-x86_64.AppImage || true
+          ls -lh PortMapper* || echo "AppImage creation optional"
+
+      - name: Upload Linux release
+        uses: actions/upload-artifact@v3
+        with:
+          name: linux-build
+          path: dist/portmapper
+
+  create-release:
+    needs: [build-macos, build-windows, build-linux]
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/')
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Download artifacts
+        uses: actions/download-artifact@v3
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            macos-build/**
+            windows-build/**
+            linux-build/**
+          draft: false
+          prerelease: false

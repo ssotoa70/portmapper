@@ -1,0 +1,173 @@
+╔════════════════════════════════════════════════════════════════════════════╗
+║                                                                            ║
+║                    PORTMAPPER 5.5 - LOCATION-INDEPENDENT                  ║
+║                                                                            ║
+║                              START HERE 👇                                ║
+║                                                                            ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+Welcome! You now have a production-ready, location-independent version of
+PortMapper. Here's where to start:
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🚀 QUICK START (Just 2 Commands)
+
+1. Install dependencies (one time only):
+   python3 -m pip install PyQt6 Pillow pandas requests --break-system-packages
+
+2. Run the application:
+   ./run.sh
+
+That's it! The application will launch.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📚 DOCUMENTATION GUIDE
+
+Choose what you need:
+
+├─ INSTALL_QUICK.txt ✓ Read this first
+│  └─ 3-step quick setup guide
+│
+├─ README.md ✓ Read if you want details
+│  └─ Complete user guide with all features
+│
+├─ IMPROVEMENTS.md ✓ Read if you're curious
+│  └─ Technical details about what was fixed
+│
+└─ RELEASE_NOTES.txt ✓ Read for complete info
+   └─ Full release documentation
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✨ WHAT'S SPECIAL ABOUT THIS VERSION?
+
+✓ Works from ANY location (not tied to a specific folder)
+✓ No installation wizard or complex setup
+✓ All resources bundled (fonts, images)
+✓ One-command launcher: ./run.sh
+✓ Can be moved, copied, or backed up easily
+✓ Works on macOS, Linux, Windows (WSL)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🛠️ SYSTEM REQUIREMENTS
+
+• Python 3.9 or later
+• PyQt6 (auto-installed)
+• Pillow/PIL (auto-installed)
+• pandas (auto-installed)  
+• requests (auto-installed)
+
+Check your Python version:
+  python3 --version
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🎯 COMMON TASKS
+
+1. FIRST TIME SETUP:
+   python3 -m pip install PyQt6 Pillow pandas requests --break-system-packages
+   ./run.sh
+
+2. SUBSEQUENT LAUNCHES:
+   ./run.sh
+
+3. DIRECT PYTHON EXECUTION:
+   python3 portmapper.py
+
+4. MOVE TO /APPLICATIONS:
+   cp -r ~/portmapper /Applications/
+   /Applications/portmapper/run.sh  # Works perfectly!
+
+5. ADD CUSTOM LAUNCHER (OPTIONAL):
+   # Create a symlink in ~/bin if it exists
+   ln -s /Users/sergio.soto/portmapper/run.sh ~/bin/portmapper
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+❓ NEED HELP?
+
+Problem: Python 3 not found
+  → Install from https://www.python.org or use: brew install python3
+
+Problem: Permission denied on run.sh
+  → chmod +x ./run.sh
+
+Problem: Missing PyQt6 (or other packages)
+  → Run: ./run.sh
+  → It will ask to install missing packages
+
+Problem: Application won't start
+  → Check Python version: python3 --version (needs 3.9+)
+  → Check dependencies: python3 -m pip list
+  → See README.md for troubleshooting
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📂 FILE ORGANIZATION
+
+/Users/sergio.soto/portmapper/
+│
+├── portmapper.py          ← Main application (don't move without folder)
+├── run.sh                 ← Smart launcher (use this to start)
+├── README.md              ← Full documentation
+├── IMPROVEMENTS.md        ← What was fixed
+├── INSTALL_QUICK.txt      ← Quick setup
+├── RELEASE_NOTES.txt      ← Complete release info
+├── START_HERE.txt         ← This file
+│
+├── ArialBold.ttf          ← Required font (keep with app)
+├── vast-man.jpeg          ← Logo image
+├── base_*.png             ← Device graphics (all kept together)
+│
+└── Projects/              ← Your work goes here
+    └── {Customer}/{Site}/{Cluster}/
+        ├── DesignOutput/  ← Generated designs
+        └── SwitchOutput/  ← Exported configs
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ WHAT'S INCLUDED
+
+✓ PortMapper application (updated for portability)
+✓ Smart launcher script with auto-setup
+✓ Complete documentation
+✓ All resource files (fonts, images)
+✓ Project folder structure
+✓ Configuration files
+
+Total size: ~20 MB (mostly image resources)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🔄 UPGRADING FROM ORIGINAL PORTMAPPER 5.5?
+
+1. Keep your existing portmapper in the old location
+2. Copy this new version to a new folder
+3. Copy your Projects/ folder from the old installation to the new one
+4. Everything works - 100% compatible!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🎓 KEY IMPROVEMENTS
+
+BEFORE: Had to be in the exact directory with all files
+AFTER:  Works from anywhere, can be copied to any location
+
+BEFORE: Hardcoded paths broke when folder moved
+AFTER:  Paths calculated at runtime - always works
+
+BEFORE: Complex setup instructions
+AFTER:  Simple ./run.sh - handles everything
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Ready? Let's go:
+
+$ ./run.sh
+
+See you in the app! 🚀
+
+═════════════════════════════════════════════════════════════════════════════════

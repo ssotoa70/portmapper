@@ -1,0 +1,11 @@
+You may need to add these python packages to operate this, but you do NOT require a virtual environment anymore.  Run this in your shell to capture these.
+
+This technically requires Python 3.9.x as a minimum, check your version:
+python3 --version
+Python 3.13.7
+
+pip3 install PyQt6 Pillow pandas requests --break-system-packages
+
+(This sound bad, it is not, it wont break anything)
+
+Then simply execute: ./portmapper.py

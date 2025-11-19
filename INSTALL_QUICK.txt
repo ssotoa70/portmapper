@@ -1,0 +1,53 @@
+PORTMAPPER 5.5 - QUICK START GUIDE
+===================================
+
+STEP 1: Verify Python
+---------------------
+python3 --version
+(Requires Python 3.9 or later)
+
+STEP 2: Install Dependencies (ONE TIME ONLY)
+---------------------------------------------
+python3 -m pip install PyQt6 Pillow pandas requests --break-system-packages
+
+Or let the launcher do it:
+./run.sh
+
+STEP 3: Run the Application
+---------------------------
+Option A (Recommended):
+./run.sh
+
+Option B (Direct):
+python3 portmapper.py
+
+THAT'S IT! You're done.
+
+---
+
+KEY FEATURES OF THIS RELEASE:
+✓ Works from ANY location (not tied to a specific folder)
+✓ No installation wizard needed
+✓ Self-contained with all resources included
+✓ Cross-platform compatible (macOS, Linux, Windows with WSL)
+
+---
+
+IMPORTANT:
+- You only need to install the Python packages ONCE
+- After that, just run "./run.sh" or "python3 portmapper.py"
+- The application will create a "Projects" folder automatically
+- All your designs and configurations are saved in Projects/{Customer}/{Site}/{Cluster}/
+
+---
+
+MOVE THE FOLDER ANYWHERE:
+- cp -r portmapper /Applications/
+- mv portmapper ~/MyTools/
+- cp -r portmapper /opt/
+
+The application will work correctly from any location!
+
+---
+
+For more details, see README.md

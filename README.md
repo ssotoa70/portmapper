@@ -1,194 +1,196 @@
-# PortMapper 5.5 - Location-Independent Release
+# PortMapper 6.0
 
-**PortMapper** is a network topology visualization and port mapping tool for storage systems.
+**Professional network topology visualization and port mapping tool for storage systems.**
 
-## What's New in This Release
+Version 6.0 features platform-specific executables for macOS, Windows, and Linux—no Python installation required!
 
-✅ **Location-Independent** - Run the application from any directory
-✅ **No Installation Required** - Just install Python dependencies once
-✅ **Self-Contained** - All resources (fonts, images) are included
-✅ **Relative Paths** - Works correctly regardless of where the folder is placed
+## Quick Links
 
-## Quick Start
+- 📥 **[Download Latest Release](https://github.com/ssotoa70/portmapper/releases/latest)**
+- 📖 **[Documentation](https://github.com/ssotoa70/portmapper#documentation)**
+- 🐛 **[Report Issues](https://github.com/ssotoa70/portmapper/issues)**
+- 💬 **[Discussions](https://github.com/ssotoa70/portmapper/discussions)**
 
-### Option 1: Using the Launcher Script (Recommended)
+## Features
 
+✅ **Multi-Platform Executables** - macOS, Windows, Linux (no Python needed!)
+✅ **Device Support** - Cisco, Sonic, Arista, VAST DBox devices
+✅ **Network Visualization** - Interactive topology diagrams
+✅ **Design Generation** - Automatic design documentation
+✅ **Configuration Export** - Switch config file generation
+✅ **Multi-Rack Planning** - Complex cluster support
+✅ **Cross-Platform** - Works on macOS, Windows, Linux
+
+## Installation
+
+### macOS (No Python Required)
 ```bash
+# Download PortMapper-6.0.0.app.zip from Releases
+unzip PortMapper-6.0.0.app.zip
+open PortMapper.app
+```
+
+### Windows (No Python Required)
+```cmd
+# Download PortMapper-6.0.0.exe from Releases
+PortMapper-6.0.0.exe
+```
+
+### Linux (No Python Required)
+```bash
+# Download PortMapper-6.0.0-x86_64.AppImage from Releases
+chmod +x PortMapper-6.0.0-x86_64.AppImage
+./PortMapper-6.0.0-x86_64.AppImage
+```
+
+### From Source (Requires Python 3.9+)
+```bash
+git clone https://github.com/ssotoa70/portmapper.git
+cd portmapper
+
+python3 -m pip install PyQt6 Pillow pandas requests --break-system-packages
 ./run.sh
 ```
 
-The launcher script will:
-- Verify Python 3.9+ is installed
-- Check for required packages
-- Prompt to install missing packages (if needed)
-- Launch the application
+## Supported Devices
 
-### Option 2: Direct Python Execution
+### Switch Vendors
+- **Cisco**: 9332D, 9364D
+- **Sonic**: SN3700, SN4600HR, SN5400, SN5600
+- **Arista**: 7050DX4, 7060DX5, 7060X664pef
 
+### Storage Systems
+- **VAST**: DBox Mavericks, Ceres, RAIDER
+
+## System Requirements
+
+### Executables (v6.0)
+- **macOS**: 10.13+ (Intel or Apple Silicon)
+- **Windows**: Windows 7+ (64-bit)
+- **Linux**: glibc 2.17+ (Ubuntu 16.04+, CentOS 7+, etc.)
+
+### Python Source
+- Python 3.9 or later
+- PyQt6, Pillow, pandas, requests
+
+## Documentation
+
+- **[User Guide](START_HERE.txt)** - Getting started
+- **[Version History](VERSION.md)** - Release notes and what's new
+- **[What's New in v6.0](IMPROVEMENTS.md)** - Platform improvements
+- **[Contributing Guide](.github/CONTRIBUTING.md)** - How to contribute
+
+## Building from Source
+
+### Development Setup
 ```bash
+git clone https://github.com/ssotoa70/portmapper.git
+cd portmapper
+
+python3 -m pip install PyQt6 Pillow pandas requests PyInstaller --break-system-packages
 python3 portmapper.py
 ```
 
-## Requirements
-
-- **Python 3.9** or later
-- **PyQt6** - GUI framework
-- **Pillow (PIL)** - Image processing
-- **pandas** - Data handling
-- **requests** - HTTP library
-
-## Installation of Dependencies
-
-If you haven't installed the required packages yet, run:
+### Building Executables
 
 ```bash
-python3 -m pip install PyQt6 Pillow pandas requests --break-system-packages
+# macOS
+bash scripts/build_macos.sh
+# Output: dist/PortMapper.app
+
+# Windows
+bash scripts/build_windows.sh
+# Output: dist/windows/PortMapper.exe
+
+# Linux
+bash scripts/build_linux.sh
+# Output: dist/linux/portmapper
 ```
 
-Or let the `run.sh` script do it for you automatically.
-
-## Directory Structure
+## Project Structure
 
 ```
 portmapper/
-├── portmapper.py          # Main application (renamed from portmapper5.5.py)
-├── run.sh                 # Launcher script (recommended method)
-├── README.md              # This file
-├── ArialBold.ttf          # Font file (required)
-├── vast-man.jpeg          # Image resource
-├── base_*.png             # Network device base images
-├── base_*.pxd             # Design files
-├── Projects/              # User projects directory (auto-created)
-│   └── {CustomerName}/
-│       └── {SiteName}/
-│           └── {ClusterName}/
-│               ├── DesignOutput/    # Generated diagrams
-│               └── SwitchOutput/    # Switch configurations
-└── DesignOutput/          # Legacy output directory (for compatibility)
+├── portmapper.py           # Main application
+├── run.sh                  # Launcher script
+├── README.md               # This file
+├── VERSION.md              # Version history
+├── LICENSE                 # MIT License
+├── scripts/
+│   ├── build_macos.sh     # macOS build script
+│   ├── build_windows.sh   # Windows build script
+│   └── build_linux.sh     # Linux build script
+├── .github/
+│   ├── workflows/         # GitHub Actions CI/CD
+│   └── CONTRIBUTING.md    # Contributing guidelines
+├── dist/                  # Built distributions
+├── build/                 # Build artifacts
+└── Projects/              # User work directory
+
 ```
 
-## Key Features
+## Contributing
 
-### Device Support
-- Cisco switches (9332D, 9364D)
-- Sonic switches (SN3700, SN4600HR, SN5400, SN5600)
-- Arista switches (7050DX4, 7060DX5, 7060X664pef)
-- VAST DBox models (Mavericks, Ceres, RAIDER)
+We welcome contributions! See [CONTRIBUTING.md](.github/CONTRIBUTING.md) for guidelines on:
+- Reporting bugs
+- Suggesting features
+- Submitting code
+- Development workflow
 
-### Functionality
-- Interactive network topology visualization
-- Port mapping and configuration
-- Design documentation generation
-- Switch configuration export
-- Multi-rack cluster planning
-- Cell planning (default & advanced modes)
+## FAQ
 
-## Usage
+**Q: Do I need to install Python?**
+A: Not for v6.0! Download the executable for your OS and run it directly.
 
-1. **Run the Application:**
-   ```bash
-   ./run.sh
-   ```
+**Q: Is it free?**
+A: Yes! PortMapper is open source under the MIT License.
 
-2. **Create a Project:**
-   - Enter Customer Name, Site Name, and Cluster Name
-   - Configure your network topology
-   - Add nodes and uplink configurations
+**Q: Works with M1/M2 Macs?**
+A: Yes! The macOS build is universal (Intel + Apple Silicon).
 
-3. **Generate Designs:**
-   - Click "Export/Generate Design" to create diagrams
-   - Output is saved to `Projects/{Customer}/{Site}/{Cluster}/DesignOutput/`
+**Q: Can I use v5.5 and v6.0 together?**
+A: Yes! They don't conflict. Projects are 100% compatible.
 
-4. **Export Configurations:**
-   - Generate switch configurations from your design
-   - Configurations are saved to `Projects/{Customer}/{Site}/{Cluster}/SwitchOutput/`
+**Q: How do I move projects between versions?**
+A: Just copy the `Projects/` folder - no migration needed!
 
-## Moving the Application
+## Security
 
-You can move the entire `portmapper` directory to any location and it will work correctly:
+- No remote telemetry
+- All processing local to your machine
+- No account or registration required
+- Open source for transparency
 
-```bash
-# Move to Applications folder
-mv portmapper /Applications/
+## Performance
 
-# Or anywhere else
-mv portmapper ~/MyTools/
+- Application startup: < 2 seconds
+- Design generation: < 30 seconds (typical)
+- Supports unlimited rack configurations
 
-# Run from any location
-cd ~/MyTools/portmapper
-./run.sh
-```
+## License
 
-The application will automatically create necessary subdirectories relative to its installation location.
+This project is licensed under the **MIT License** - see [LICENSE](LICENSE) for details.
 
-## Improvements Made
+## Support
 
-### Path Handling
-- **Before:** Used hardcoded paths (`'DesignOutput'`, `'Projects'`) that only worked in the current directory
-- **After:** Uses absolute paths relative to the script's location, working from anywhere
+- **Issues & Bugs**: [GitHub Issues](https://github.com/ssotoa70/portmapper/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/ssotoa70/portmapper/discussions)
+- **Maintainer**: [@ssotoa70](https://github.com/ssotoa70)
 
-### Key Changes in Code
-1. Updated `resource_path()` to use script directory instead of current working directory
-2. Changed `DesignOutput` path initialization to be relative to script location
-3. Updated `Projects` path construction to use absolute paths
-4. Fixed file dialogs to use correct default directories
+## Changelog
 
-### Compatibility
-- Fully compatible with PyInstaller bundled versions
-- Works with both direct script execution and packaged executables
-- All existing projects and saved configurations remain compatible
+See [VERSION.md](VERSION.md) for complete version history.
 
-## Troubleshooting
+## Acknowledgments
 
-### "ModuleNotFoundError" for PyQt6, Pillow, pandas, or requests
-
-**Solution:** Run the installer script:
-```bash
-python3 -m pip install PyQt6 Pillow pandas requests --break-system-packages
-```
-
-Or use the launcher:
-```bash
-./run.sh
-```
-
-### Application won't start
-
-1. Verify Python version: `python3 --version` (should be 3.9+)
-2. Check all dependencies are installed: `python3 -m pip list`
-3. Ensure file permissions: `chmod +x run.sh`
-
-### Projects not saving in expected location
-
-- Check that the folder has write permissions
-- Verify the `Projects` subdirectory exists (created automatically on first use)
-- Ensure you're not running from a read-only filesystem
-
-## Advanced Usage
-
-### Command Line Arguments
-
-The application may support additional arguments (see application documentation):
-
-```bash
-python3 portmapper.py [arguments]
-./run.sh [arguments]
-```
-
-### System Integration
-
-To add a desktop shortcut or system menu item, see your OS documentation for creating launcher files.
-
-## Support & Documentation
-
-For more information on device configurations and advanced features, refer to the embedded help in the application.
-
-## Version Info
-
-- **Current Release:** 5.5 (Location-Independent Edition)
-- **Python Minimum:** 3.9
-- **Last Updated:** November 2025
+Built with:
+- [PyQt6](https://www.riverbankcomputing.com/software/pyqt/) - Cross-platform UI
+- [PyInstaller](https://pyinstaller.org/) - Standalone executables
+- [Pillow](https://python-pillow.org/) - Image processing
+- [pandas](https://pandas.pydata.org/) - Data handling
 
 ---
 
-**Note:** This is an improved distribution of PortMapper with enhanced portability. The application logic and functionality remain identical to the original.
+**[⬇️ Download Now](https://github.com/ssotoa70/portmapper/releases/latest)** | **[📖 Docs](START_HERE.txt)** | **[🤝 Contribute](.github/CONTRIBUTING.md)**
+
+Made with ❤️ for network engineers and system architects.

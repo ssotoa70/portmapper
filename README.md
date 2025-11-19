@@ -56,11 +56,8 @@ python3 -m pip install PyQt6 Pillow pandas requests --break-system-packages
 
 ### Switch Vendors
 - **Cisco**: 9332D, 9364D
-- **Sonic**: SN3700, SN4600HR, SN5400, SN5600
+- **Mellanox**: SN3700, SN4600HR, SN5400, SN5600
 - **Arista**: 7050DX4, 7060DX5, 7060X664pef
-
-### Storage Systems
-- **VAST**: DBox Mavericks, Ceres, RAIDER
 
 ## System Requirements
 

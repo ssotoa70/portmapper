@@ -14,7 +14,7 @@ Version 6.0 features platform-specific executables for macOS, Windows, and Linux
 ## Features
 
 ✅ **Multi-Platform Executables** - macOS, Windows, Linux (no Python needed!)
-✅ **Device Support** - Cisco, Sonic, Arista, VAST DBox devices
+✅ **Device Support** - Cisco, Arista, Mellanox devices
 ✅ **Network Visualization** - Interactive topology diagrams
 ✅ **Design Generation** - Automatic design documentation
 ✅ **Configuration Export** - Switch config file generation
